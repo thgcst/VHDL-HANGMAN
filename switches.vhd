@@ -6,8 +6,8 @@ USE ieee.std_logic_unsigned.ALL;
 ENTITY switches IS PORT (
   clock : IN STD_LOGIC;
   current_number : IN INTEGER RANGE 0 TO 9;
-  current_step : IN INTEGER RANGE 0 TO 5;
-  output_current_step : OUT INTEGER RANGE 0 TO 5;
+  current_step : IN INTEGER RANGE 0 TO 6;
+  output_current_step : OUT INTEGER RANGE 0 TO 6;
   remaining_lives : IN INTEGER RANGE 0 TO 3;
   output_remaining_lives : OUT INTEGER RANGE 0 TO 3;
   SW : IN STD_LOGIC_VECTOR(9 DOWNTO 0)
@@ -16,7 +16,7 @@ END switches;
 
 ARCHITECTURE hardware OF switches IS
 
-  SIGNAL output_cs : INTEGER RANGE 0 TO 5 := 0;
+  SIGNAL output_cs : INTEGER RANGE 0 TO 6 := 0;
   SIGNAL output_rl : INTEGER RANGE 0 TO 3 := 3;
   SIGNAL last_SW : STD_LOGIC_VECTOR(9 DOWNTO 0);
 

@@ -4,7 +4,7 @@ USE ieee.numeric_std.ALL;
 USE ieee.std_logic_unsigned.ALL;
 
 ENTITY disp7seg IS PORT (
-  current_step : IN INTEGER RANGE 0 TO 5;
+  current_step : IN INTEGER RANGE 0 TO 6;
   disp_step : IN INTEGER RANGE 0 TO 5;
   dec_digit : IN INTEGER RANGE 0 TO 9;
   segment_7dis : OUT STD_LOGIC_VECTOR(6 DOWNTO 0)
