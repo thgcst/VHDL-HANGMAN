@@ -12,6 +12,7 @@ ENTITY main IS PORT (
   HEX3 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
   HEX4 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
   HEX5 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
+  LEDR : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
   SW : IN STD_LOGIC_VECTOR(9 DOWNTO 0)
 );
 END main;
@@ -21,6 +22,7 @@ ARCHITECTURE hardware OF main IS
   CONSTANT secret : INTEGER := 122245;
   SIGNAL current_step : INTEGER RANGE 0 TO 5 := 0;
   SIGNAL current_number : INTEGER RANGE 0 TO 9;
+  SIGNAL remaining_lives : INTEGER RANGE 0 TO 3 := 3;
 
   COMPONENT display IS PORT (
     secret_password : IN INTEGER RANGE 0 TO 999999;
@@ -43,6 +45,12 @@ ARCHITECTURE hardware OF main IS
     );
   END COMPONENT;
 
+  COMPONENT lives IS PORT (
+    remaining_lives : IN INTEGER RANGE 0 TO 3 := 3;
+    LEDR : OUT STD_LOGIC_VECTOR(2 DOWNTO 0)
+    );
+  END COMPONENT;
+
 BEGIN
 
   WITH current_step SELECT current_number <=
@@ -55,6 +63,7 @@ BEGIN
     0 WHEN OTHERS;
 
   disps : display PORT MAP(secret, current_step, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
-  sw0 : switches PORT MAP(CLOCK_50, current_number, current_step, current_step, SW);
+  sws : switches PORT MAP(CLOCK_50, current_number, current_step, current_step, SW);
+  lvs : lives PORT MAP(remaining_lives, LEDR);
 
 END hardware;
