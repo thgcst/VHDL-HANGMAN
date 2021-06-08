@@ -41,6 +41,8 @@ ARCHITECTURE hardware OF main IS
     current_number : IN INTEGER RANGE 0 TO 9;
     current_step : IN INTEGER RANGE 0 TO 5;
     output_current_step : OUT INTEGER RANGE 0 TO 5;
+    remaining_lives : IN INTEGER RANGE 0 TO 3;
+    output_remaining_lives : OUT INTEGER RANGE 0 TO 3;
     SW : IN STD_LOGIC_VECTOR(9 DOWNTO 0)
     );
   END COMPONENT;
@@ -63,7 +65,7 @@ BEGIN
     0 WHEN OTHERS;
 
   disps : display PORT MAP(secret, current_step, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
-  sws : switches PORT MAP(CLOCK_50, current_number, current_step, current_step, SW);
+  sws : switches PORT MAP(CLOCK_50, current_number, current_step, current_step, remaining_lives, remaining_lives, SW);
   lvs : lives PORT MAP(remaining_lives, LEDR);
 
 END hardware;
